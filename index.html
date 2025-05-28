@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semilla Urbana - Flora y Fauna de Sabaneta</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f8ff;
+      color: #1a1a1a;
+    }
+    header {
+      background: #0077b6;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    nav {
+      background: #023e8a;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 0.75rem;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    section {
+      padding: 2rem;
+    }
+    #map {
+      height: 400px;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+    .plant-list, .fauna-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .plant-card, .fauna-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+    }
+    footer {
+      background: #0077b6;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+    button {
+      background-color: #0096c7;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #00b4d8;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Semilla Urbana</h1>
+    <p>Explora, cuida y protege la flora y fauna de Sabaneta</p>
+  </header>
+
+  <nav>
+    <a href="#mapa">Mapa</a>
+    <a href="#plantas">Plantas</a>
+    <a href="#fauna">Fauna</a>
+    <a href="#manuales">Manuales</a>
+    <a href="#actividades">Actividades</a>
+  </nav>
+
+  <section id="mapa">
+    <h2>Mapa Ecológico de Sabaneta</h2>
+    <div id="map"></div>
+  </section>
+
+  <section id="plantas">
+    <h2>Plantas Locales</h2>
+    <div class="plant-list" id="plantList"></div>
+  </section>
+
+  <section id="fauna">
+    <h2>Fauna Local</h2>
+    <div class="fauna-list" id="faunaList"></div>
+  </section>
+
+  <section id="manuales">
+    <h2>Guías y Manuales</h2>
+    <p>Aquí encontrarás recursos para cuidar y proteger las especies vegetales y animales.</p>
+    <button onclick="alert('Descargando manual...')">Descargar Manual PDF</button>
+  </section>
+
+  <section id="actividades">
+    <h2>Actividades y Talleres</h2>
+    <ul>
+      <li>Senderismo ecológico en La Romera</li>
+      <li>Taller de jardinería urbana</li>
+      <li>Campaña de reciclaje y compostaje</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Semilla Urbana - Sabaneta, Colombia</p>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script>
+    // Inicializar mapa Leaflet
+    const map = L.map('map').setView([6.1508, -75.6168], 14); // Coordenadas aproximadas de Sabaneta
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Datos de ejemplo para plantas
+    const plantas = [
+      { nombre: 'Yarumo', descripcion: 'Árbol de rápido crecimiento, común en zonas andinas.' },
+      { nombre: 'Guayacán', descripcion: 'Conocido por su floración amarilla intensa.' },
+      { nombre: 'Heliconia', descripcion: 'Planta tropical con flores vistosas.' }
+    ];
+
+    const contenedorPlantas = document.getElementById('plantList');
+    plantas.forEach(planta => {
+      const div = document.createElement('div');
+      div.className = 'plant-card';
+      div.innerHTML = `<h3>${planta.nombre}</h3><p>${planta.descripcion}</p>`;
+      contenedorPlantas.appendChild(div);
+    });
+
+    // Datos de ejemplo para fauna
+    const fauna = [
+      { nombre: 'Zarigüeya', descripcion: 'Marsupial nocturno que ayuda a controlar plagas.' },
+      { nombre: 'Tangara', descripcion: 'Ave colorida común en bosques andinos.' },
+      { nombre: 'Mariposa morpho', descripcion: 'Mariposa azul de gran tamaño que habita zonas húmedas.' }
+    ];
+
+    const contenedorFauna = document.getElementById('faunaList');
+    fauna.forEach(animal => {
+      const div = document.createElement('div');
+      div.className = 'fauna-card';
+      div.innerHTML = `<h3>${animal.nombre}</h3><p>${animal.descripcion}</p>`;
+      contenedorFauna.appendChild(div);
+    });
+  </script>
+</body>
+</html>
