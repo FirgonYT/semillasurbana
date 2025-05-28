@@ -21,8 +21,9 @@
     nav {
       background: #023e8a;
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
-      gap: 2rem;
+      gap: 1rem;
       padding: 0.75rem;
     }
     nav a {
@@ -66,6 +67,23 @@
     }
     button:hover {
       background-color: #00b4d8;
+    }
+
+    /* Estilos responsivos */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+      section {
+        padding: 1rem;
+      }
+      #map {
+        height: 300px;
+      }
+      .plant-list, .fauna-list {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -119,13 +137,11 @@
 
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
   <script>
-    // Inicializar mapa Leaflet
-    const map = L.map('map').setView([6.1508, -75.6168], 14); // Coordenadas aproximadas de Sabaneta
+    const map = L.map('map').setView([6.1508, -75.6168], 14);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
-    // Datos de ejemplo para plantas
     const plantas = [
       { nombre: 'Yarumo', descripcion: 'Árbol de rápido crecimiento, común en zonas andinas.' },
       { nombre: 'Guayacán', descripcion: 'Conocido por su floración amarilla intensa.' },
@@ -140,7 +156,6 @@
       contenedorPlantas.appendChild(div);
     });
 
-    // Datos de ejemplo para fauna
     const fauna = [
       { nombre: 'Zarigüeya', descripcion: 'Marsupial nocturno que ayuda a controlar plagas.' },
       { nombre: 'Tangara', descripcion: 'Ave colorida común en bosques andinos.' },
